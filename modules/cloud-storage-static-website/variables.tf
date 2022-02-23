@@ -143,3 +143,11 @@ variable "custom_labels" {
   default     = {}
 }
 
+variable "access_logs_retention_policy" {
+  description = "Configuration of the access logs bucket's data retention policy for how long access log objects in the bucket should be retained."
+  type = object({
+    is_locked        = bool
+    retention_period = number
+  })
+  default = null
+}

@@ -105,6 +105,14 @@ resource "google_storage_bucket" "access_logs" {
     }
   }
 
+  dynamic "retention_policy" {
+    for_each = var.access_logs_retention_policy == null ? [] : [var.access_logs_retention_policy]
+    content {
+      is_locked        = var.access_logs_retention_policy.is_locked
+      retention_period = var.access_logs_retention_policy.retention_period
+    }
+  }
+
   lifecycle_rule {
     action {
       type = "Delete"
